@@ -1,27 +1,33 @@
-// import { successResponse, serverErrorResponse } from "@libs/api-gateway";
-// import { APIGatewayProxyEvent } from "aws-lambda";
+import { successResponse, serverErrorResponse } from "@libs/api-gateway";
+import { APIGatewayProxyEvent } from "aws-lambda";
+import { fibonacci as fib } from "@ultirequiem/fibonacci";
 
-// const fibonacci = async (e: APIGatewayProxyEvent) => {
-//   const input = e.queryStringParameters?.number;
+const fibonacci = async (e: APIGatewayProxyEvent) => {
+  const input = e.queryStringParameters?.number;
 
-//   if (input == null || input === "" || isNaN(Number(input))) {
-//     return serverErrorResponse({
-//       message: "Missing number parameter",
-//     });
-//   }
+  const host = e.headers.Host;
+  const baseURL = `https://${host}/dev`;
 
-//   const number = Number(input);
+  if (input == null || input === "" || isNaN(Number(input))) {
+    return serverErrorResponse({
+      message: "Missing number parameter",
+    });
+  }
 
-//   if (number < 0 || number > 100) {
-//     return serverErrorResponse({
-//       message: "Number must be greater than 0 and less than 100",
-//     });
-//   }
+  const number = Number(input);
 
-//   const fibonacci = await calculateFibonacci(number);
+  if (number < 0 || number > 100) {
+    return serverErrorResponse({
+      message: "Number must be greater than 0 and less than 100",
+    });
+  }
 
-//   return successResponse({
-//     input: input,
-//     fibonacci: fibonacci,
-//   });
-// };
+  const fibonacci = await fib(number);
+
+  return successResponse({
+    input: input,
+    fibonacci: fibonacci,
+  });
+};
+
+export const main = fibonacci;

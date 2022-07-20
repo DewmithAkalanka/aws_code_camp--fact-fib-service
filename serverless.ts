@@ -1,6 +1,7 @@
 import type { AWS } from "@serverless/typescript";
 
 import factorial from "@functions/factorial";
+import fibonacci from "@functions/fibonacci";
 
 const serverlessConfiguration: AWS = {
   service: "fact-fib-service",
@@ -20,7 +21,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { factorial },
+  functions: { factorial, fibonacci },
   package: { individually: true },
   custom: {
     esbuild: {
