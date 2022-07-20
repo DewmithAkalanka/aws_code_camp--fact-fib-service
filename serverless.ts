@@ -10,7 +10,7 @@ const serverlessConfiguration: AWS = {
   provider: {
     name: "aws",
     runtime: "nodejs14.x",
-    // profile:"sls"
+    profile: "sls",
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
