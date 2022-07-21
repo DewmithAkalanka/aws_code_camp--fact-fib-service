@@ -12,7 +12,8 @@ const fibonacci = async (e: APIGatewayProxyEvent) => {
   //Fibonacci Calculation
   if (input == null || input === "" || isNaN(Number(input))) {
     return serverErrorResponse({
-      message: "Missing number parameter",
+      message:
+        "Missing number parameter, Please provide `/?number=<number>` after word `fibonacci` in URL",
     });
   }
 

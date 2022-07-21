@@ -8,7 +8,7 @@ const factorial = async (e: APIGatewayProxyEvent) => {
   if (input == null || input === "" || isNaN(Number(input))) {
     return serverErrorResponse({
       message:
-        "Missing number parameter, Please provide `/?number=<number>` after factorial in URL",
+        "Missing number parameter, Please provide `/?number=<number>` after word `factorial` in URL",
     });
   }
 
